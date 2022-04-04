@@ -1,12 +1,13 @@
 import {BrowserRouter} from 'react-router-dom'
-import Search from './components/Search';
 import Popular from './components/Popular';
+import Nav from './components/Nav';
+import './App.css'
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Search/>
+        <Nav/>
         <Popular/>
       </BrowserRouter>
     </div>

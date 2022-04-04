@@ -2,26 +2,34 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import {Link} from 'react-router-dom'
-import { Splide, SplideSlide } from '@splidejs/react-splide';
+import {SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/splide.min.css';
 
 const Wrapper = styled(motion.div)`
-    margin: 1rem 0rem;
-    padding: 0;
+    margin: 0.25rem;
+    padding: 0.5rem 2rem 2rem 2rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    border-radius: 1rem;
+    letter-spacing:1px;
+    background: #003E1F;
+    min-height:77vh;
+    color:#D5F2E3;
 `;
 const Drawer = styled(motion.div)`
     display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
     grid-gap:1rem;
     `
 
 
 const Card = styled.div`
     width: 100%;
-    min-height: 17rem;
+    min-height: 16rem;
     border-radius: 1rem;
     overflow: hidden;
     position: relative;
+    border: 1px solid white;
 
     img{
         border-radius:1rem;
@@ -37,7 +45,7 @@ const Card = styled.div`
         left: 50%;
         bottom:0%;
         transform: translate(-50%,0%);
-        color: white;
+        color: rgb(240, 240, 240);
         width: 100%;
         text-center: center;
         font-weight: 600;
@@ -62,18 +70,9 @@ const Gradient = styled.div`
 function Popular() {
     const [popular,setPopular]=useState([]);
     useEffect(()=>{
-        updateDimensions();
         getPopular();
     },[]);
 
-    const [Num,setNum]= useState(7);
-    const [width, setWindowWidth] = useState(0);
-    const updateDimensions = () => {
-    const width = window.innerWidth
-    setWindowWidth(width)
-    if(width<1400)
-        setNum(5)
-    }
     const getPopular = async()=>{
             const api = await fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=453762e716c58e7d11e2166114b99e36&language=en-US&page=1`);
             const data = await api.json();
@@ -89,7 +88,7 @@ function Popular() {
             exit={{opacity:0}}
             transition={{duration:0.5}}
             >
-                <h2>Latest Released</h2>
+                <h1>Latest Release</h1>
                 {/* <Splide options={{
                     perPage: `${Num}`,
                     arrows: false,
