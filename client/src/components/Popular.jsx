@@ -74,7 +74,7 @@ function Popular() {
     },[]);
 
     const getPopular = async()=>{
-            const api = await fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=453762e716c58e7d11e2166114b99e36&language=en-US&page=1`);
+            const api = await fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`);
             const data = await api.json();
             setPopular(data.results)
             console.log(data.results)
@@ -89,13 +89,6 @@ function Popular() {
             transition={{duration:0.5}}
             >
                 <h1>Latest Release</h1>
-                {/* <Splide options={{
-                    perPage: `${Num}`,
-                    arrows: false,
-                    pagination: false,
-                    drag: "free",
-                    gap: "2rem",
-                }}> */}
                 <Drawer>
                 {popular.map((movie)=>{
                     const {poster_path}=movie
@@ -111,7 +104,6 @@ function Popular() {
                         </SplideSlide>
                     );
                 })}
-                {/* </Splide> */}
                 </Drawer>
             </Wrapper>
     </div>
