@@ -1,16 +1,14 @@
 import {BrowserRouter} from 'react-router-dom'
-import Popular from './components/Popular';
 import Nav from './components/Nav';
+import Pages from './pages/Pages';
 import './App.css'
-import Desciption from './pages/Desciption';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Nav/>
-        {/* <Popular/> */}
-        <Desciption/>
+        <Pages/>
       </BrowserRouter>
     </div>
   );

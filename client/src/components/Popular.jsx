@@ -5,8 +5,61 @@ import {Link} from 'react-router-dom'
 import {SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/splide.min.css';
 
+function Popular() {
+    const [popular,setPopular]=useState([]);
+    useEffect(()=>{
+        getPopular();
+    },[]);
+
+    const getPopular = async()=>{
+
+        const check = localStorage.getItem("popular");
+
+        if(check){
+            setPopular(JSON.parse(check));
+        }
+        else{
+            const api = await fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`);
+            const data = await api.json();
+            localStorage.setItem('popular',JSON.stringify(data.results))
+            setPopular(data.results)
+            console.log(data.results)
+        }
+
+    }
+  return (
+    <div>
+            <Wrapper
+            animate={{opacity:1}}
+            initial={{opacity:0}}
+            exit={{opacity:0}}
+            transition={{duration:0.5}}
+            >
+                <h1>Latest Release</h1>
+                <Drawer>
+                {popular ? popular.map((movie)=>{
+                    const {poster_path}=movie
+                    return(
+                        <SplideSlide key={movie.id}>
+                        <Card>
+                            <Link to={'/movie/'+ movie.id}>
+                            <p>{movie.title}</p>
+                            <img src={`https://image.tmdb.org/t/p/original${poster_path}`} alt={movie.title}/>
+                            <Gradient/>
+                            </Link>
+                        </Card>
+                        </SplideSlide>
+                    );
+                }):
+                <h2>Loading...</h2>}
+                </Drawer>
+            </Wrapper>
+    </div>
+  );
+}
+
 const Wrapper = styled(motion.div)`
-    margin: 0.25rem;
+    margin: 0.25rem 0;
     padding: 0.5rem 2rem 2rem 2rem;
     font-family: 'Playfair Display', serif;
     font-weight: 400;
@@ -21,8 +74,6 @@ const Drawer = styled(motion.div)`
     grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
     grid-gap:1rem;
     `
-
-
 const Card = styled.div`
     width: 100%;
     min-height: 16rem;
@@ -65,50 +116,6 @@ const Gradient = styled.div`
     height: 100%;
     background-image: linear-gradient(to bottom,rgba(0,0,0,0), rgba(0,0, 0,0.45));
 `
-
-
-function Popular() {
-    const [popular,setPopular]=useState([]);
-    useEffect(()=>{
-        getPopular();
-    },[]);
-
-    const getPopular = async()=>{
-            const api = await fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`);
-            const data = await api.json();
-            setPopular(data.results)
-            console.log(data.results)
-
-    }
-  return (
-    <div>
-            <Wrapper
-            animate={{opacity:1}}
-            initial={{opacity:0}}
-            exit={{opacity:0}}
-            transition={{duration:0.5}}
-            >
-                <h1>Latest Release</h1>
-                <Drawer>
-                {popular.map((movie)=>{
-                    const {poster_path}=movie
-                    return(
-                        <SplideSlide key={movie.id}>
-                        <Card>
-                            <Link to={'/movie/'+ movie.id}>
-                            <p>{movie.title}</p>
-                            <img src={`https://image.tmdb.org/t/p/original${poster_path}`} alt={movie.title}/>
-                            <Gradient/>
-                            </Link>
-                        </Card>
-                        </SplideSlide>
-                    );
-                })}
-                </Drawer>
-            </Wrapper>
-    </div>
-  );
-}
 
 
 export default Popular;

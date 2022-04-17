@@ -2,10 +2,11 @@ import React from 'react'
 import {FaDesktop} from 'react-icons/fa'
 import styled from 'styled-components'
 
-const Logoo = styled.div`
+const Logoo = styled.a`
     display:flex;
     align-items:center;
     gap:0.5rem;
+    text-decoration: none;
     font-family: 'Abril Fatface', cursive;
     color: #003E1F;
     svg{
@@ -21,7 +22,7 @@ const Logoo = styled.div`
 
 function Logo() {
   return (
-    <Logoo>
+    <Logoo href='/'>
         <FaDesktop></FaDesktop>
         <h2>Binge Bust</h2>
     </Logoo>

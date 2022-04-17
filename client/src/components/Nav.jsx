@@ -37,7 +37,7 @@ function Nav() {
         <Logo/>
         <Mob>
             <Search/>
-            <a href='#'><FaUserAlt id='user-profile' cursor="poiter"></FaUserAlt></a>
+            <a href='/profile'><FaUserAlt id='user-profile' cursor="poiter"></FaUserAlt></a>
         </Mob>
         
     </Navv>
