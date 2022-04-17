@@ -13,6 +13,7 @@ function Profile() {
         <FaUserCircle/>
         <h1>My Profile</h1>
         <h2>Username : User 1</h2>
+        <h2>EmailID : example@gmail.com</h2>
     </Wrapper>
   )
 }
