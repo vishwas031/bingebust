@@ -4,6 +4,7 @@ import {Route, Routes, useLocation} from 'react-router-dom'
 import {AnimatePresence} from 'framer-motion'
 import Details from '../components/Details'
 import Profile from '../components/Profile'
+import Searched from './Searched'
 
 function Pages() {
   const location = useLocation();
@@ -12,6 +13,7 @@ function Pages() {
       <Routes Location={location} key={location.pathname}>
         <Route path='/' element={<Home/>}/>
         <Route path='/profile' element={<Profile/>}/>
+        <Route path='/searched/:search' element={<Searched/>}/>
         <Route path='/movie/:name' element={<Details/>}/>
       </Routes>
       </AnimatePresence>
