@@ -11,6 +11,7 @@ import {Link} from 'react-router-dom'
 function Details(){
     const params = useParams();
     const [details, setDetails] = useState({});
+    const [isLoading, setIsLoading]= useState(true);
     const [casts, setCast] = useState({});
     const [gridSize, setGridSize] = useState(16)
     const POSTER_PATH = "https://image.tmdb.org/t/p/original"
@@ -32,7 +33,8 @@ function Details(){
         const data = await api.json();
         const cast = await api2.json();
         setDetails(data)
-        setCast(cast)
+        setCast(cast.cast)
+        setIsLoading(false)
         console.log(data)
         console.log(cast)
     }
@@ -44,7 +46,7 @@ function Details(){
         transition={{duration:0.5}}>
             { details ? 
             <>
-            <div>
+            <div className='temp'>
               <img src={`${POSTER_PATH}${details.poster_path}`} alt="poster"/>
             </div>
             <Info>
@@ -52,23 +54,30 @@ function Details(){
                     <h1>{details.title}</h1>
                     <h2>{details.tagline}</h2>
                     <h3 className='ratings'>{details.vote_average}/10<AiFillStar/></h3>  
+                    <div className='rightAlign'>
+                    <h2>Overview</h2>
                     <h3>{details.overview}</h3>
-                    {/* <h3>{details.genres[1].name}</h3> */}
+                    <h2>Genres</h2>
+                    {!isLoading && <Genre>{details.genres.map((genre)=>{return(<Button>{genre.name}</Button>)})}</Genre>}
+                    <br/>
+                    <h2>Cast</h2>
                     <Drawer>
-                      {/* {casts.map((cast)=>{
-                        var {name, character,id,profile_path} = cast;
+                      {!isLoading && casts.map((cast)=>{
+                        var {name,id,profile_path} = cast;
                         return(
+                          profile_path &&
                           <SplideSlide key={id}>
                           <Card>
-                              <Link to={'/movie/'+ id}>
+                              <a href={`https://en.wikipedia.org/wiki/${name}`}>
                               <p>{name}</p>
-                              <img src={`https://image.tmdb.org/t/p/original${profile_path}`} alt={name}/>
-                              </Link>
+                              <Poster><img src={`https://image.tmdb.org/t/p/original${profile_path}`} alt={name}/></Poster>
+                              </a>
                           </Card>
                           </SplideSlide>
                     );
-                      })} */}
+                      })}
                     </Drawer>
+                    </div>
                 </div>
             </Info>
             </> :
@@ -98,7 +107,6 @@ const Wrapper = styled(motion.div)`
   color: white;
 }
 h3{
-  margin-top:2.5rem;
   font-family: 'Source Sans Pro', sans-serif;
   font-style: italic;
   font-size:1.25rem;
@@ -106,37 +114,76 @@ h3{
 }
 h2{
   font-weight:400;
-  transform:translate(0,-1rem);
 }
-img{
-    border-radius: 1rem;
-      width: 15rem;
-      height:22rem;
-      object-fit: cover;
-      border: 1px solid white;
-  }
+
 .ratings{
   svg{margin-left:7px;}
   font-weight:bold;
   margin-top:0rem;
 }
+.temp{
+  img{
+      border-radius: 1rem;
+      width: 15rem;
+      height:22rem;
+      object-fit: cover;
+      border: 1px solid white;
+  }
+}
+.rightAlign{
+  text-align:start;
+}
 `
 const Card = styled.div`
+    padding-bottom: 0.5rem;
+    text-align:center;
     width: 100%;
-    min-height: 16rem;
+    height: 10rem;
     border-radius: 1rem;
     overflow: hidden;
     position: relative;
     border: 1px solid white;
+    font-size:small;
+    a{
+      text-decoration:none;
+      font-family: 'Playfair Display', serif;
+      color:#D5F2E3;
+    }
+`
+const Poster = styled.div`
+  img{
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  object-fit: cover;
+  }
 `
 const Drawer = styled(motion.div)`
     display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
     grid-gap:1rem;
     `
 
 const Info = styled.div`
   width:100%;
+`
+const Genre = styled.div`
+  display:flex;
+  justify-content:start;
+  gap:2rem;
+  @media (max-width: 600px) {
+   {
+    flex-direction: column;
+  }
+}
+`
+const Button = styled.div`
+  border-radius:0.5rem;
+  background-color:#D5F2E3;
+  color: #003E1F;
+  font-weight:600;
+  padding: 0.4rem 1rem;
+  width: fit-content;
 `
 
 

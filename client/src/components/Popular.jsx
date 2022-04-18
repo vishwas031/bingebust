@@ -25,7 +25,6 @@ function Popular() {
             setPopular(data.results)
             console.log(data.results)
         }
-
     }
   return (
     <div>
@@ -37,7 +36,7 @@ function Popular() {
             >
                 <h1>Latest Release</h1>
                 <Drawer>
-                {popular ? popular.map((movie)=>{
+                {popular.map((movie)=>{
                     const {poster_path}=movie
                     return(
                         <SplideSlide key={movie.id}>
@@ -50,8 +49,7 @@ function Popular() {
                         </Card>
                         </SplideSlide>
                     );
-                }):
-                <h2>Loading...</h2>}
+                })}
                 </Drawer>
             </Wrapper>
     </div>
