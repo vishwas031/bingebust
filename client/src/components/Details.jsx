@@ -4,8 +4,6 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components'
 import {AiFillStar} from 'react-icons/ai'
 import {SplideSlide } from '@splidejs/react-splide';
-import {Link} from 'react-router-dom'
-
 
 
 function Details(){
@@ -13,16 +11,8 @@ function Details(){
     const [details, setDetails] = useState({});
     const [isLoading, setIsLoading]= useState(true);
     const [casts, setCast] = useState({});
-    const [gridSize, setGridSize] = useState(16)
     const POSTER_PATH = "https://image.tmdb.org/t/p/original"
   
-    function getWindowDimensions() {
-      const { innerWidth: width} = window;
-      return {
-        width
-      };
-    }
-
     useEffect(() => {
       getOverview(params.name);
     }, [params.name]);
@@ -35,8 +25,6 @@ function Details(){
         setDetails(data)
         setCast(cast.cast)
         setIsLoading(false)
-        console.log(data)
-        console.log(cast)
     }
     return(
         <Wrapper
