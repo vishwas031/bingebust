@@ -44,13 +44,14 @@ Technologies used in the project are :
 ## Screenshots
 
 Home page
-![Home page]()
+![Home page](https://github.com/vishwas031/bingebust/blob/master/client/public/Home_Page.png)
 
 Movie Details Page
-![Home page]()
+![Home page 1](https://github.com/vishwas031/bingebust/blob/master/client/public/Movie_Details_1.png)
+![Home page 2](https://github.com/vishwas031/bingebust/blob/master/client/public/Movie_Details_2.png)
 
 Profile page
-![Home page]()
+![Home page](https://github.com/vishwas031/bingebust/blob/master/client/public/Profile_page.png)
 
 Search Results page
-![Home page]()
+![Home page](https://github.com/vishwas031/bingebust/blob/master/client/public/Search_Results.png)
