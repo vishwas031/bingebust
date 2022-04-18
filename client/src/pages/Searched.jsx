@@ -1,59 +1,51 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import styled from "styled-components";
-import {Link} from 'react-router-dom'
+import{useEffect, useState } from 'react'
+import {useParams,Link} from 'react-router-dom'
+import styled from 'styled-components'
+import {motion} from 'framer-motion'
 import {SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/splide/dist/css/splide.min.css';
 
-function Popular() {
-    const [popular,setPopular]=useState([]);
+
+function Searched() {
+    const [searchedMovies , setSearchedMovies] = useState([]);
+    const params = useParams();
+    const getSearched = async(name)=>{
+        const data = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=f569e379d2c0bc46e541ef9379a90215&language=en-USpage=1&query=${name}`);
+        const movies = await data.json()
+        setSearchedMovies(movies.results)
+    };
+
     useEffect(()=>{
-        getPopular();
-    },[]);
+        getSearched(params.search);
+    },[params.search])
 
-    const getPopular = async()=>{
-
-        const check = localStorage.getItem("popular");
-
-        if(check){
-            setPopular(JSON.parse(check));
-        }
-        else{
-            const api = await fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`);
-            const data = await api.json();
-            localStorage.setItem('popular',JSON.stringify(data.results))
-            setPopular(data.results)
-            console.log(data.results)
-        }
-    }
   return (
     <div>
-            <Wrapper
-            animate={{opacity:1}}
-            initial={{opacity:0}}
-            exit={{opacity:0}}
-            transition={{duration:0.5}}
-            >
-                <h1>Latest Release</h1>
-                <Drawer>
-                {popular.map((movie)=>{
-                    const {poster_path}=movie
+    <Wrapper
+    animate={{opacity:1}}
+    initial={{opacity:0}}
+    exit={{opacity:0}}
+    transition={{duration:0.5}}
+    >
+        <h1>Results</h1>
+        <Drawer>
+        {searchedMovies.map((item)=>{
+                const {poster_path}=item
                     return(
-                        <SplideSlide key={movie.id}>
+                        <SplideSlide key={item.id}>
                         <Card>
-                            <Link to={'/movie/'+ movie.id}>
-                            <p>{movie.title}</p>
-                            <img src={`https://image.tmdb.org/t/p/original${poster_path}`} alt={movie.title}/>
+                            <Link to={'/movie/'+ item.id}>
+                            <p>{item.title}</p>
+                            <img src={`https://image.tmdb.org/t/p/original${poster_path}`} alt={item.title}/>
                             <Gradient/>
                             </Link>
                         </Card>
                         </SplideSlide>
                     );
-                })}
-                </Drawer>
-            </Wrapper>
+            })}
+        </Drawer>
+    </Wrapper>
     </div>
-  );
+  )
 }
 
 const Wrapper = styled(motion.div)`
@@ -116,4 +108,4 @@ const Gradient = styled.div`
 `
 
 
-export default Popular;
+export default Searched
