@@ -3,6 +3,7 @@ import {useParams} from 'react-router-dom'
 import { motion } from 'framer-motion';
 import styled from 'styled-components'
 import {AiFillStar} from 'react-icons/ai'
+import {BsLink45Deg,BsPlayCircleFill} from 'react-icons/bs'
 import {SplideSlide } from '@splidejs/react-splide';
 
 
@@ -36,17 +37,29 @@ function Details(){
             <>
             <div className='temp'>
               <img src={`${POSTER_PATH}${details.poster_path}`} alt="poster"/>
+              <a href={`${details.homepage}`}><BsPlayCircleFill className='play-btn'/></a>
             </div>
             <Info>
                 <div>
-                    <h1>{details.title}</h1>
+                    <a className='moviepage' href={`${details.homepage}`}><h1>{details.title}</h1><BsLink45Deg/></a>
                     <h2>{details.tagline}</h2>
                     <h3 className='ratings'>{details.vote_average}/10<AiFillStar/></h3>  
                     <div className='rightAlign'>
                     <h2>Overview</h2>
                     <h3>{details.overview}</h3>
+                    <Oneline>
+                    <h2>Release Date :</h2>
+                    <h3>{details.release_date}</h3>
+                    </Oneline>
+                    <Oneline>
+                    <h2>Runtime :</h2>
+                    <h3>{details.runtime} min.</h3>
+                    </Oneline>
                     <h2>Genres</h2>
                     {!isLoading && <Genre>{details.genres.map((genre)=>{return(<Button>{genre.name}</Button>)})}</Genre>}
+                    <br/>
+                    <h2>Production Companies</h2>
+                    {!isLoading && <Genre>{details.production_companies.map((company)=>{return(<h3 className='margin-less'>{company.name}</h3>)})}</Genre>}
                     <br/>
                     <h2>Cast</h2>
                     <Drawer>
@@ -89,7 +102,32 @@ const Wrapper = styled(motion.div)`
     color:#D5F2E3;
     justify-items:center;
     text-align:center;
+.moviepage{
+  text-decoration:none;
+  color:#D5F2E3;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:5px;
+  svg{
+    font-size:1.5rem;
+  }
+}
+.margin-less{
+  margin: 0.5rem 0;
+}
+.play-btn{
+  display:block;
+  position:relative;
+  bottom: 6rem;
+  left:90%;
+  font-size:4rem;
+}
 
+a{
+  text-decoration:none;
+  color:#D5F2E3;
+}
 .active{
   background: linear-gradient(35deg, #494949,#313131);
   color: white;
@@ -99,9 +137,11 @@ h3{
   font-style: italic;
   font-size:1.25rem;
   font-weight:300;
+  margin-left:20px;
 }
 h2{
-  font-weight:400;
+  font-weight:500;
+  
 }
 
 .ratings{
@@ -121,6 +161,10 @@ h2{
 .rightAlign{
   text-align:start;
 }
+`
+const Oneline = styled.div`
+  display:flex;
+  align-items:center;
 `
 const Card = styled.div`
     padding-bottom: 0.5rem;
@@ -159,6 +203,7 @@ const Genre = styled.div`
   display:flex;
   justify-content:start;
   gap:2rem;
+  margin-left:20px;
   @media (max-width: 600px) {
    {
     flex-direction: column;
