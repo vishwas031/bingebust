@@ -1,0 +1,24 @@
+.form-container {
+    padding: 3rem 5rem;
+    border-radius: 10px;
+    background-color: #D5F2E3;
+    color: #003E1F;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.acc-logo {
+    background-color: #D5F2E3;
+    color: #003E1F;
+    font-size: 1.25rem;
+}
+
+.logo-container {
+    background-color: #D5F2E3;
+    padding: 0.75rem;
+    border-radius: 1rem;
+}
