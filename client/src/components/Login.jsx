@@ -107,8 +107,7 @@ const Button = styled.button`
 `
 
 
-export default class Login extends Component {
-    render() {
+function Login() {
         return (
             <Wrapper
         animate={{opacity:1}}
@@ -142,5 +141,5 @@ export default class Login extends Component {
             </form>
             </Wrapper>
         );
-    }
 }
+export default Login;
