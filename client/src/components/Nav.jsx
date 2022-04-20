@@ -3,7 +3,7 @@ import Logo from './Logo'
 import Search from './Search'
 import styled from 'styled-components'
 import {FaUserAlt} from 'react-icons/fa'
-
+import { Link } from 'react-router-dom'
 
 const Navv = styled.div`
     min-height:16vh;
@@ -37,7 +37,7 @@ function Nav() {
         <Logo/>
         <Mob>
             <Search/>
-            <a href='/profile'><FaUserAlt id='user-profile' cursor="poiter"></FaUserAlt></a>
+            <Link to='/login'><div className='logo-container'><FaUserAlt className="acc-logo"/></div></Link>
         </Mob>
         
     </Navv>
