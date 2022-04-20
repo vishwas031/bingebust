@@ -1,0 +1,23 @@
+.form-container {
+    /* width: 50%; */
+    background-color: #003E1F;
+    color: aliceblue;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.acc-logo {
+    background-color: aliceblue;
+    color: #003E1F;
+    border-radius: 50%;
+}
+
+.logo-container {
+    background-color: aliceblue;
+    padding: 10px;
+    border-radius: 10px;
+}

@@ -13,18 +13,20 @@ function Popular() {
 
     const getPopular = async()=>{
 
-        const check = localStorage.getItem("popular");
+        // const check = localStorage.getItem("popular");
 
-        if(check){
-            setPopular(JSON.parse(check));
-        }
-        else{
-            const api = await fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`);
+        // console.log(check)
+        // if(check !== undefined){
+        //     setPopular(JSON.parse(check));
+        // }
+        // else{
+            const api = await fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.REACT_APP_API_KEY}`);
             const data = await api.json();
+            console.log(data)
             localStorage.setItem('popular',JSON.stringify(data.results))
             setPopular(data.results)
             console.log(data.results)
-        }
+        // }
     }
   return (
     <div>

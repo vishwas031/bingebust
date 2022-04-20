@@ -2,7 +2,8 @@ import React from 'react'
 import Logo from './Logo'
 import Search from './Search'
 import styled from 'styled-components'
-import {FaUserAlt} from 'react-icons/fa'
+import {BsFillPersonFill} from 'react-icons/bs'
+import { Link } from 'react-router-dom'
 
 
 const Navv = styled.div`
@@ -37,7 +38,7 @@ function Nav() {
         <Logo/>
         <Mob>
             <Search/>
-            <a href='/profile'><FaUserAlt id='user-profile' cursor="poiter"></FaUserAlt></a>
+            <Link to='/login'><div className='logo-container'><BsFillPersonFill className="acc-logo"/></div></Link>
         </Mob>
         
     </Navv>
