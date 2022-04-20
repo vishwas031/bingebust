@@ -1,4 +1,3 @@
-import React, { Component } from "react";
 import { motion } from 'framer-motion';
 import styled from 'styled-components'
 
@@ -136,10 +135,10 @@ function Login() {
 
                 <Button type="submit" className="btn btn-primary btn-block">Submit</Button>
                 <p className="forgot-password text-right">
-                    <a href="#">Forgot password?</a>
+                    <a href="/">Forgot password?</a>
                 </p>
             </form>
             </Wrapper>
         );
 }
-export default Login;
+export default Login
