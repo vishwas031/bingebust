@@ -18,7 +18,7 @@ appropriate video for every occasion.
 ### 1.Clone
 
 ```terminal
-$ git clone https://github.com/vishwas031/bingebust.git
+git clone https://github.com/vishwas031/bingebust.git
 ```
 
 ### 2. Install packages used
